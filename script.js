@@ -48,9 +48,30 @@ const target = {
 };
 
 const mapElement = document.getElementById("map");
+
+const ctx = mapElement.getContext("2d");
+
+
 mapElement.addEventListener("click",(event) => {
     click++; // click = click + 1
     // onsole.log(click);
+
+    // Draw arc
+    const rect = mapElement.getBoundingClientRect()
+    
+    let posX = event.clientX - rect.left;
+    let posY = event.clientY - rect.top;
+
+    // "#ff0000" = "#f00"
+    ctx.fillStyle = "#ff0000";
+
+    ctx.beginPath();
+
+    ctx.arc(posX, posY, 5, 0, 2 * Math.PI);
+
+    ctx.fill();
+
+    ///////////////////////////////////////////////
     
     const distance = getDistance(event, target);
     const distanceHint = getDistanceHint(distance);
